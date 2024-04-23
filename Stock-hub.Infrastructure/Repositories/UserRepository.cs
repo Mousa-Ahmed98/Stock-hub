@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Identity.Client;
 using Microsoft.IdentityModel.Tokens;
-using Stock_hub.Application;
+using Stock_hub.Application.Interfaces;
 using Stock_hub.Core.Entities;
 using Stock_hub.DTOS;
 using System;
@@ -64,7 +64,8 @@ namespace Stock_hub.Infrastructure.Repositories
                 return new
                 {
                     token = new JwtSecurityTokenHandler().WriteToken(token),
-                    expiration = token.ValidTo
+                    expiration = token.ValidTo,
+                    ApplicationUserId = user.Id
                 };
 
             }

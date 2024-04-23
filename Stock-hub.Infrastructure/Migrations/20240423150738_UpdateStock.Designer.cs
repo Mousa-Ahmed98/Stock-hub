@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Stock_hub.Infrastructure;
 
@@ -11,9 +12,11 @@ using Stock_hub.Infrastructure;
 namespace Stock_hub.Infrastructure.Migrations
 {
     [DbContext(typeof(StockDbContext))]
-    partial class StockDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240423150738_UpdateStock")]
+    partial class UpdateStock
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -220,37 +223,6 @@ namespace Stock_hub.Infrastructure.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
-            modelBuilder.Entity("Stock_hub.Core.Entities.Order", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("ApplicationUserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("OrderType")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Quantity")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Symbol")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ApplicationUserId");
-
-                    b.HasIndex("Symbol");
-
-                    b.ToTable("Orders");
-                });
-
             modelBuilder.Entity("Stock_hub.Core.Entities.Stock", b =>
                 {
                     b.Property<string>("Symbol")
@@ -271,31 +243,31 @@ namespace Stock_hub.Infrastructure.Migrations
                         {
                             Symbol = "AAPL",
                             CurrentPrice = 12.34m,
-                            TimeStamp = new DateTime(2024, 4, 23, 22, 9, 29, 738, DateTimeKind.Local).AddTicks(2943)
+                            TimeStamp = new DateTime(2024, 4, 23, 17, 7, 37, 303, DateTimeKind.Local).AddTicks(6146)
                         },
                         new
                         {
                             Symbol = "GOOGL",
                             CurrentPrice = 15.19m,
-                            TimeStamp = new DateTime(2024, 4, 23, 22, 9, 29, 738, DateTimeKind.Local).AddTicks(3024)
+                            TimeStamp = new DateTime(2024, 4, 23, 17, 7, 37, 303, DateTimeKind.Local).AddTicks(6215)
                         },
                         new
                         {
                             Symbol = "MSFT",
                             CurrentPrice = 102.11m,
-                            TimeStamp = new DateTime(2024, 4, 23, 22, 9, 29, 738, DateTimeKind.Local).AddTicks(3032)
+                            TimeStamp = new DateTime(2024, 4, 23, 17, 7, 37, 303, DateTimeKind.Local).AddTicks(6222)
                         },
                         new
                         {
                             Symbol = "AMZN",
                             CurrentPrice = 98.4m,
-                            TimeStamp = new DateTime(2024, 4, 23, 22, 9, 29, 738, DateTimeKind.Local).AddTicks(3043)
+                            TimeStamp = new DateTime(2024, 4, 23, 17, 7, 37, 303, DateTimeKind.Local).AddTicks(6228)
                         },
                         new
                         {
                             Symbol = "TSLA",
                             CurrentPrice = 211.02m,
-                            TimeStamp = new DateTime(2024, 4, 23, 22, 9, 29, 738, DateTimeKind.Local).AddTicks(3049)
+                            TimeStamp = new DateTime(2024, 4, 23, 17, 7, 37, 303, DateTimeKind.Local).AddTicks(6234)
                         });
                 });
 
@@ -316,9 +288,6 @@ namespace Stock_hub.Infrastructure.Migrations
                     b.Property<string>("Symbol")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
-
-                    b.Property<DateTime>("TimeStamp")
-                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
@@ -376,25 +345,6 @@ namespace Stock_hub.Infrastructure.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("Stock_hub.Core.Entities.Order", b =>
-                {
-                    b.HasOne("Stock_hub.Core.Entities.ApplicationUser", "ApplicationUser")
-                        .WithMany()
-                        .HasForeignKey("ApplicationUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Stock_hub.Core.Entities.Stock", "Stock")
-                        .WithMany()
-                        .HasForeignKey("Symbol")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("ApplicationUser");
-
-                    b.Navigation("Stock");
                 });
 
             modelBuilder.Entity("Stock_hub.Core.Entities.StockUpdate", b =>

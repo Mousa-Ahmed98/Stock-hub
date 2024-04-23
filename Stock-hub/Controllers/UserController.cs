@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Stock_hub.Application;
+using Stock_hub.Application.Interfaces;
 using Stock_hub.DTOS;
 
 namespace Stock_hub.Controllers

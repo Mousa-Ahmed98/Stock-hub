@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Stock_hub.Application;
+using Stock_hub.Application.Interfaces;
 using Stock_hub.Application.Mapping;
 using Stock_hub.Core.Entities;
 using Stock_hub.Infrastructure;
@@ -65,6 +66,9 @@ namespace Stock_hub
 
             builder.Services.AddScoped<IStockRepository, StockRepository>();
             builder.Services.AddScoped<IUserRepository, UserRepository>();
+
+            builder.Services.AddScoped<IOrderService, OrderService>();
+            builder.Services.AddScoped<IOrderRepository, OrderRepository>();
 
             //AutoMapper
             builder.Services.AddAutoMapper(typeof(MappingProfile));
