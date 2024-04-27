@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Stock_hub.Application
+namespace Stock_hub.Application.Interfaces
 {
     public interface IUserRepository
     {

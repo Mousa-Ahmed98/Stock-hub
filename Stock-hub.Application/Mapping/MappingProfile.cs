@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Stock_hub.Application.DTOS;
 using Stock_hub.Core.Entities;
 using Stock_hub.DTOS;
 using System;
@@ -15,6 +16,10 @@ namespace Stock_hub.Application.Mapping
         {
             //////////TSource              TDestination
             CreateMap<UserRegisterDTO, ApplicationUser>();
+            CreateMap<StockUpdateReqDto, StockUpdate>();
+            CreateMap<OrderDto, Order>();
+            CreateMap<Order, OrderRespDTO>();
+            CreateMap<StockUpdate, StockUpdateRespDTO>();
         }
     }
 }
