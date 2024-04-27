@@ -1,10 +1,9 @@
 ﻿using AutoMapper;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using Stock_hub.Application.DTOS;
+using Stock_hub.Application.Hubs;
 using Stock_hub.Application.Interfaces;
-using Stock_hub.Core.Entities;
 
 namespace Stock_hub.Controllers
 {
@@ -29,7 +28,7 @@ namespace Stock_hub.Controllers
         }
 
         [HttpPost("Update")]
-        public async Task<IActionResult> Update(StockUpdateDto stockUpdateDto)
+        public async Task<IActionResult> Update(StockUpdateReqDto stockUpdateDto)
         {
             if (ModelState.IsValid)
             {   
@@ -37,7 +36,7 @@ namespace Stock_hub.Controllers
 
                 if(IsUpdated)
                 {
-                    return Ok("stock updated successfully");
+                    return Ok();
                 }
                 return BadRequest();
             }
@@ -50,6 +49,13 @@ namespace Stock_hub.Controllers
         public async Task<IActionResult> Get(string symbol)
         {
             return Ok(await _stockService.GetStockHistory(symbol));
+        }
+
+
+        [HttpGet("GetOnlySymbols")]
+        public async Task<IActionResult> GetOnlySymbols()
+        {
+            return Ok(await _stockService.GetOnlySymbols());
         }
     }
 }

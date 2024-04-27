@@ -13,5 +13,6 @@ namespace Stock_hub.Application.Interfaces
         Task<Stock> AddStock(Stock stock);
         Task<bool> UpdateStock(StockUpdate stockUpdate);
         Task<IReadOnlyList<StockUpdate>> GetStockHistory(string symbol);
+        Task<IReadOnlyList<string>> GetOnlySymbols();
     }
 }

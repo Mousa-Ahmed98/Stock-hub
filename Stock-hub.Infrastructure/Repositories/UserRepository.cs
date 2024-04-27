@@ -55,7 +55,7 @@ namespace Stock_hub.Infrastructure.Repositories
                     new SigningCredentials(authSecretKey, SecurityAlgorithms.HmacSha256);
                 //Create token
                 JwtSecurityToken token = new JwtSecurityToken(
-                    issuer: "http://localhost:5052",
+                    issuer: "http://localhost:5051",
                     audience: "http://localhost:4200",
                     expires: DateTime.Now.AddHours(1),
                     claims: claims,

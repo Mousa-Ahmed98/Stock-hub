@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Stock_hub.Infrastructure;
 
@@ -11,9 +12,11 @@ using Stock_hub.Infrastructure;
 namespace Stock_hub.Infrastructure.Migrations
 {
     [DbContext(typeof(StockDbContext))]
-    partial class StockDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240425213421_OrderTimeStamp")]
+    partial class OrderTimeStamp
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -268,6 +271,38 @@ namespace Stock_hub.Infrastructure.Migrations
                     b.HasKey("Symbol");
 
                     b.ToTable("Stocks");
+
+                    b.HasData(
+                        new
+                        {
+                            Symbol = "AAPL",
+                            CurrentPrice = 12.34m,
+                            TimeStamp = new DateTime(2024, 4, 25, 23, 34, 19, 845, DateTimeKind.Local).AddTicks(1411)
+                        },
+                        new
+                        {
+                            Symbol = "GOOGL",
+                            CurrentPrice = 15.19m,
+                            TimeStamp = new DateTime(2024, 4, 25, 23, 34, 19, 845, DateTimeKind.Local).AddTicks(1482)
+                        },
+                        new
+                        {
+                            Symbol = "MSFT",
+                            CurrentPrice = 102.11m,
+                            TimeStamp = new DateTime(2024, 4, 25, 23, 34, 19, 845, DateTimeKind.Local).AddTicks(1488)
+                        },
+                        new
+                        {
+                            Symbol = "AMZN",
+                            CurrentPrice = 98.4m,
+                            TimeStamp = new DateTime(2024, 4, 25, 23, 34, 19, 845, DateTimeKind.Local).AddTicks(1493)
+                        },
+                        new
+                        {
+                            Symbol = "TSLA",
+                            CurrentPrice = 211.02m,
+                            TimeStamp = new DateTime(2024, 4, 25, 23, 34, 19, 845, DateTimeKind.Local).AddTicks(1497)
+                        });
                 });
 
             modelBuilder.Entity("Stock_hub.Core.Entities.StockUpdate", b =>
@@ -278,10 +313,10 @@ namespace Stock_hub.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<decimal>("NewPrice")
+                    b.Property<decimal>("CurrentPrice")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<decimal>("OldPrice")
+                    b.Property<decimal>("NewPrice")
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("Symbol")

@@ -21,10 +21,19 @@ namespace Stock_hub.Controllers
             _userManager = userManager;
         }
 
-        [HttpPost("Order")]
+        [HttpPost("Add")]
         public async Task<IActionResult> Add(OrderDto orderDto)
         {
-            return Ok(await _orderService.AddOrder(orderDto));
+            if (ModelState.IsValid)
+            {
+                var userId = HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
+                await Console.Out.WriteLineAsync("/////////////////%%%%%%%%%%%%%%%%%?????????????");
+                await Console.Out.WriteLineAsync(userId);
+                await Console.Out.WriteLineAsync("/////////////////%%%%%%%%%%%%%%%%%?????????????");
+                return Ok(await _orderService.AddOrder(orderDto, userId!));
+            }
+            else
+                return BadRequest(ModelState);
         }
 
         [HttpGet("Orders")]

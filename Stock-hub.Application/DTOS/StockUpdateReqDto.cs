@@ -1,19 +1,17 @@
-﻿using System;
+﻿using Stock_hub.Core.Entities;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Stock_hub.Core.Entities
+namespace Stock_hub.Application.DTOS
 {
-    public class StockUpdate
+    public class StockUpdateReqDto
     {
-        public int Id { get; set; }
-
         [Required]
-        [ForeignKey("Stock")]
         public string Symbol { get; set; }
 
         [Required]
@@ -21,10 +19,5 @@ namespace Stock_hub.Core.Entities
 
         [Required]
         public decimal NewPrice { get; set; }
-
-        [Required]
-        public DateTime TimeStamp { get; set; }
-
-        public Stock Stock { get; set; }
     }
 }

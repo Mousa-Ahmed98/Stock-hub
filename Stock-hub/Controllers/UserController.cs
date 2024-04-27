@@ -25,7 +25,7 @@ namespace Stock_hub.Controllers
                 IdentityResult res = await _userService.Register(userRegisterDTO);
                 if (res.Succeeded)
                 {
-                    return Ok("Created successfully");
+                    return Ok();
                 }
                 return BadRequest(res.Errors.First());
             }

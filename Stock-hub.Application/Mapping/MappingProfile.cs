@@ -16,8 +16,10 @@ namespace Stock_hub.Application.Mapping
         {
             //////////TSource              TDestination
             CreateMap<UserRegisterDTO, ApplicationUser>();
-            CreateMap<StockUpdateDto, StockUpdate>();
+            CreateMap<StockUpdateReqDto, StockUpdate>();
             CreateMap<OrderDto, Order>();
+            CreateMap<Order, OrderRespDTO>();
+            CreateMap<StockUpdate, StockUpdateRespDTO>();
         }
     }
 }

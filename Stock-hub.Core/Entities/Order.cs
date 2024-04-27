@@ -25,6 +25,9 @@ namespace Stock_hub.Core.Entities
         [Required]
         public OrderType OrderType { get; set; }
 
+        [Required]
+        public DateTime TimeStamp { get; set; }
+
         public Stock Stock { get; set; }
         public ApplicationUser ApplicationUser { get; set; }
     }

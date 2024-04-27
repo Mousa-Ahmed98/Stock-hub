@@ -31,6 +31,11 @@ namespace Stock_hub.Infrastructure.Repositories
             return await _stockDbContext.Stocks.ToListAsync();
         }
 
+        public async Task<IReadOnlyList<string>> GetOnlySymbols()
+        {
+            return await _stockDbContext.Stocks.Select(x => x.Symbol).ToListAsync();
+        }
+
         public async Task<Stock> GetStockAsync(string symbol)
         {
             Stock stock = await _stockDbContext.Stocks.FindAsync(symbol);

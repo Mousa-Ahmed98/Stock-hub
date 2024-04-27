@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Stock_hub.Application;
+using Stock_hub.Application.Hubs;
 using Stock_hub.Application.Interfaces;
 using Stock_hub.Application.Mapping;
 using Stock_hub.Core.Entities;
@@ -54,12 +55,19 @@ namespace Stock_hub
                     ValidateAudience = true,
                     ValidateLifetime = true,
                     ValidateIssuerSigningKey = true,
-                    ValidIssuer = "http://localhost:5052",
+                    ValidIssuer = "http://localhost:5051",
                     ValidAudience = "http://localhost:4200",
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("I am Mousa---ITI, hack it if you can"))
                 };
             });
 
+            //add cors
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("MyPolicy", policy => policy.AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader());
+            });
             //add custom services
             builder.Services.AddScoped<IStockService, StockService>();
             builder.Services.AddScoped<IUserService, UserService>();
@@ -73,6 +81,8 @@ namespace Stock_hub
             //AutoMapper
             builder.Services.AddAutoMapper(typeof(MappingProfile));
 
+            builder.Services.AddSignalR();
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -82,9 +92,11 @@ namespace Stock_hub
                 app.UseSwaggerUI();
             }
 
+            app.UseCors("MyPolicy");
             app.UseAuthorization();
 
-
+            //SignalR URL==>hub
+            app.MapHub<RealTimeHub>("/realtimehub");
             app.MapControllers();
 
             app.Run();

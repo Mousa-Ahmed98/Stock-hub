@@ -21,7 +21,7 @@ namespace Stock_hub.Infrastructure
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
-            List<Stock> stocks = new List<Stock>();
+            /*List<Stock> stocks = new List<Stock>();
             stocks.Add(new Stock
             {
                 Symbol = "AAPL",
@@ -57,7 +57,7 @@ namespace Stock_hub.Infrastructure
                 TimeStamp = DateTime.Now,
             });
 
-            builder.Entity<Stock>().HasData(stocks);
+            builder.Entity<Stock>().HasData(stocks);*/
         }
 
     }

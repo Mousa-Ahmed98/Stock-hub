@@ -10,7 +10,7 @@ namespace Stock_hub.Application.Interfaces
 {
     public interface IOrderService
     {
-        Task<Order> AddOrder(OrderDto orderDto);
-        Task<IReadOnlyList<Order>> GetOrders(string UserId);
+        Task<Order> AddOrder(OrderDto orderDto, string userId);
+        Task<IReadOnlyList<OrderRespDTO>> GetOrders(string UserId);
     }
 }

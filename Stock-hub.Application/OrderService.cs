@@ -27,15 +27,19 @@ namespace Stock_hub.Application
             _userManager = userManager;
         }
 
-        public async Task<Order> AddOrder(OrderDto orderDto)
+        public async Task<Order> AddOrder(OrderDto orderDto, string userId)
         {
             Order order = _mapper.Map<Order>(orderDto);
+            order.ApplicationUserId = userId;
+            order.TimeStamp = DateTime.Now;
             return await _orderRepository.AddOrder(order);
         }
 
-        public async Task<IReadOnlyList<Order>> GetOrders(string UserId)
+        public async Task<IReadOnlyList<OrderRespDTO>> GetOrders(string UserId)
         {
-            return await _orderRepository.GetOrders(UserId);
+            IReadOnlyList<Order>  ordersList = await _orderRepository.GetOrders(UserId);
+            List<OrderRespDTO> ordersRespDtos = _mapper.Map<List<OrderRespDTO>>(ordersList);
+            return ordersRespDtos;
         }
     }
 }

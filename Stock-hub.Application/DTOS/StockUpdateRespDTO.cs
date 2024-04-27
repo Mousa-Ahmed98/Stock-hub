@@ -1,7 +1,5 @@
-﻿using Stock_hub.Core.Entities;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
@@ -9,15 +7,16 @@ using System.Threading.Tasks;
 
 namespace Stock_hub.Application.DTOS
 {
-    public class StockUpdateDto
+    public class StockUpdateRespDTO
     {
-        [Required]
+        public int Id { get; set; }
+
         public string Symbol { get; set; }
 
-        [Required]
-        public decimal CurrentPrice { get; set; }
+        public decimal OldPrice { get; set; }
 
-        [Required]
         public decimal NewPrice { get; set; }
+
+        public DateTime TimeStamp { get; set; }
     }
 }
